@@ -1,30 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
+import 'bootstrap/dist/js/bootstrap.js';
+// Importing a few elements from react-bootstrap for design aesthetics
+import {Nav} from 'react-bootstrap';
 
-
-const Home = () => (
-  <div>
-    Home
-  </div>
-)
+// Importing a few elements from react-router-dom to handle routing in our application
+import { BrowserRouter, Link, Redirect, Route, Switch} from 'react-router-dom';
+import Home from './Home';
 
 const About = () => (
   <div>
     About
-  </div>
-)
-
-const Code = () => (
-  <div>
-    Code
-  </div>
-)
-
-const Contact = () => (
-  <div>
-    Contact
   </div>
 )
 
@@ -34,68 +22,43 @@ const Info = () => (
   </div>
 )
 
-const MainMenu = () => {
-  return (
-    <div>
-      <Link to="/">
-        <button>home</button>
-      </Link>
-      <Link to="/about">
-        <button>About</button>
-      </Link>
-      <Link to="/code">
-        <button>code</button>
-      </Link>
-      <Link to="/contact">
-        <button>contact</button>
-      </Link>
-      <Link to="/info">
-        <button>info</button>
-      </Link>
-    </div>
-  );
-};
 
 class App extends Component {
-  // constructor
-  constructor(props) {
-      super(props);
-
-      // set state
-      this.state = {text: "Before API Call"};
-  }
-
-  componentDidMount() {
-    this.fetchText()
-  }
-
-  fetchText = async() => {
-    const response = await fetch(`/api/test`)
-    const text = await response.json()
-    this.setState({text: text})
-  }
-
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-            <h2>{this.state.text}</h2>
-            <MainMenu />
-          </header>
+    render () {
+      return (
+        <BrowserRouter>
           <div>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/code" component={Code} />
-            <Route exact path="/contact" component={Contact} />
-            <Route exact path="/info" component={Info} />
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Connectify</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ">
+                <li class="nav-item active">
+                  <Nav.Link as={ Link } to="/Home">Home</Nav.Link>
+                </li>
+                <li class="nav-item">
+                  <Nav.Link as={ Link } to="/About">About</Nav.Link>
+                </li>
+                <li class="nav-item">
+                  <Nav.Link as={ Link } to="/Info">Info</Nav.Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+            <Switch>
+              <Redirect exact from="/" to="Home"/>
+              <Route exact path="/Home" component={Home}/>
+              <Route exact path="/About" component={About}/>
+              <Route exact path="/Info" component={Info}/>
+            </Switch>
           </div>
-        </div>
-      </Router>
-    );
-  }
+        </BrowserRouter>
+      );
+    }
 }
 
 export default App;
