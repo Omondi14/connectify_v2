@@ -57,6 +57,14 @@ const MainMenu = () => {
 };
 
 class App extends Component {
+  // constructor
+  constructor(props) {
+      super(props);
+
+      // set state
+      this.state = {text: "Before API Call"};
+  }
+
   componentDidMount() {
     this.fetchText()
   }
