@@ -1,23 +1,27 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
 
 // Create the server
 const app = express()
 const db = require('./queries')
 
 app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-)
+app.use(helmet());
+app.use(cors());
 
-// Boiler plate for route calls
+// log HTTP requests
+app.use(morgan('combined'));
+
+// Testing API Endpoint
 app.get('/api/test', (req, res) => {
   const test_str = "This is a test string";
   res.json({test_str});
 });
 
+// Endpoints
 app.get('/api/users', db.getUsers)
 app.get('/api/users/:id', db.getUserById)
 app.post('/api/users', db.createUser)
