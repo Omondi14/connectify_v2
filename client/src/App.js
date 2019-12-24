@@ -64,7 +64,7 @@ class App extends Component {
   fetchText = async() => {
     const response = await fetch(`/api/test`)
     const text = await response.json()
-    this.setState({test: test})
+    this.setState({text: text})
   }
 
   render() {
