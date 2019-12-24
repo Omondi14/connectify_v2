@@ -28,7 +28,7 @@ const Contact = () => (
   </div>
 )
 
-const info = () => (
+const Info = () => (
   <div>
     info
   </div>
@@ -78,11 +78,11 @@ class App extends Component {
             <MainMenu />
           </header>
           <div>
-            <Route exact path="/" component={AppViews.Home} />
-            <Route exact path="/about" component={AppViews.About} />
-            <Route exact path="/code" component={AppViews.Code} />
-            <Route exact path="/contact" component={AppViews.Contact} />
-            <Route exact path="/presence" component={AppViews.Presence} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/code" component={Code} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/info" component={Info} />
           </div>
         </div>
       </Router>
